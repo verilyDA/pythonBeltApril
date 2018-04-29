@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+  </head>
+  <body>
+    <a href="/main">Dashboard</a> - <a href="/logout">Logout</a><br>
+    <h1>Posts by {{ data.name }}</h1>
+    <h2>Count: {{ count }}</h2>
+
+  <h2>Quotes</h2>
+  {% for each in allQuotes %}
+  <fieldset>
+    <legend>{{each.author}}</legend>
+    {{each.desc}}<br>
+  </fieldset>
+  {% endfor %}
+
+  </form>
+  </body>
+</html>

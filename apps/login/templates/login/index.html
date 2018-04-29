@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Index Page</title>
+  </head>
+  <body>
+    <h1>Welcome!</h1>
+    </table>
+    {% for message in messages %}
+      <li class="{{ message.tags }}">
+        {% if 'safe' in message.tags %}
+          {{ message|safe }}
+        {% else %}
+          {{ message }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    <form action="/register" method="post">
+      <fieldset>
+        <legend>Register</legend>
+        {% csrf_token %}
+        Name: <input type="text" name="name"><br>
+        Alias: <input type="text" name="alias"><br>
+        Email: <input type="text" name="email"><br>
+        Password: <input type="password" name="password"><br>
+        Confirm Password: <input type="password" name="passwordC"><br>
+        Date of Birth: <input type="date" name="DOB">
+        <input type="submit" value="Register">
+      </fieldset>
+    </form>
+    <form action="/login" method="post">
+      <fieldset>
+        <legend>Login</legend>
+        {% csrf_token %}
+        Email: <input type="text" name="emailLog"><br>
+        Password: <input type="password" name="passwordLog"><br>
+        <input type="submit" value="Login">
+      </fieldset>
+    </form>
+
+
+  </body>
+</html>

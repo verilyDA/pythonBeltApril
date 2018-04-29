@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+  </head>
+  <body>
+    <a href="/logout">Logout</a><br>
+    <h1>Welcome {{ data.name }}</h1>
+
+  <h2>Quotable Quotes</h2>
+  {% for each in allQuotes %}
+  <fieldset>
+    <legend>{{each.author}}</legend>
+    {{each.desc}}<br>
+    Posted by <a href="/userquotes/{{each.posted_by.id}}">{{each.posted_by.name}}</a><br>
+    <input type="button" value="Add to your favorites" onclick="window.location.href='/fave/{{each.id}}'" />
+  </fieldset>
+  {% endfor %}
+
+  <h2>My Quotes</h2>
+  {% for each in myQuotes %}
+  <fieldset>
+    <legend>{{each.author}}</legend>
+    {{each.desc}}<br>
+    <input type="button" value="Remove from your favorites" onclick="window.location.href='/unfave/{{each.id}}'" />
+  </fieldset>
+  {% endfor %}
+
+  {% for message in messages %}
+    <li class="{{ message.tags }}">
+      {% if 'safe' in message.tags %}
+        {{ message|safe }}
+      {% else %}
+        {{ message }}
+      {% endif %}
+    </li>
+  {% endfor %}
+  <form action="/quote" method="post">
+    <fieldset>
+      <legend><h2>Contribute a Quote</h2></legend>
+      {% csrf_token %}
+      Author: <input type="text" name="author" value=""><br>
+      Quote: <input type="textarea" name="desc" value=""><br>
+      <input type="submit" name="" value="Submit">
+    </fieldset>
+
+  </form>
+  </body>
+</html>
